@@ -15,12 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include #adicionar o include nesta parte, não se esquecer.
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('spotify.urls')),
+    path('api/spotify/', include('spotify.urls')), # Não se esquecer nome do app no path que será inserido do aplicativo. NÃO SE ESQUECER DO BARRA NO FINAL!!!
 ]
 
 # Cada app criado no projeto Django é necessário que seja criado o nome dele aqui dentro.
-# Neste caso o "path('api/', include('spotify.urls'))," foi criado.
+# Neste caso o "path('api/', include('spotify.urls'))," foi criado um caminho para o Insomnia.
