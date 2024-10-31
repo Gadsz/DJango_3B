@@ -1,17 +1,20 @@
 from django.shortcuts import render
 
-# Create your views here.
-
-# Parte analisado da views.py do exemplo "biblioteca"
-# do professor.
+# Parte analisado da views.py do exemplo "biblioteca" do professor
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
+# Você precisa importar os models neste contexto o "Artista" e "Album" pois são os únicos 2 models neste exemplo
+
 from .models import Artista, Album
+#  Você precisa importar os serializers neste contexto o "ArtistaSerializer" e "AlbumSerializer" pois são os únicos 2 models neste exemplo
+
 from .serializers import ArtistaSerializer, AlbumSerializer
+
+# EXEMPLO 1 DE ARTISTA FUNCIONAL
 
 class ArtistaListCreateView(APIView):
     def post(self, request):
@@ -25,7 +28,9 @@ class ArtistaListCreateView(APIView):
         artistas = ArtistaSerializer.objects.all()
         serializer = ArtistaSerializer(artistas, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
+# EXEMPLO 1 DE ALBUM FUNCIONAL
+
 class AlbumListCreateView(APIView):
     def post(self, request):
         serializer = AlbumSerializer(data=request.data)
