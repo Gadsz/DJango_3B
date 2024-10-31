@@ -6,19 +6,25 @@ from django.db import models
 
 from django.db import models
 
+# Inicio do Artista
+# (TUDO ISSO VAI NO JSON QUANDO EXECUTADO VIA INSONMIA)
+
 class Artista(models.Model):
-    nome = models.CharField(max_length=255)
-    genero = models.CharField(max_length=100)
-    bio = models.TextField(blank=True)
+    nome = models.CharField(max_length=255) # Nome dele obrigatório
+    genero = models.CharField(max_length=100) # Genero da musica obrigatório
+    bio = models.TextField(blank=True) # Biografia opcional
 
     def __str__(self):
         return self.nome
 
+# Inicio do Album
+# (TUDO ISSO VAI NO JSON QUANDO EXECUTADO VIA INSONMIA)
+
 class Album(models.Model):
-    titulo = models.CharField(max_length=255)
-    artista = models.ForeignKey(Artista, on_delete=models.CASCADE)
-    data_lancamento = models.DateField()
-    numero_de_faixas = models.IntegerField()
+    titulo = models.CharField(max_length=255) # Titulo album obrigatório
+    artista = models.ForeignKey(Artista, on_delete=models.CASCADE) #Artista com chave estrangeira para não repetir
+    data_lancamento = models.DateField() # Data de lançamento do album
+    numero_de_faixas = models.IntegerField() # Número de músicas no álbum
     capa = models.URLField(blank=True)  # URL da capa do álbum
 
     def __str__(self):
