@@ -23,3 +23,11 @@ INSTALLED_APPS = [
     ‘nome_app',
     'rest_framework',
 ]
+
+
+Após configuração de models, serializers, urls e views.
+
+Rodar makemigrate e o migrate e após isso rodar o runserver.
+
+Após isso ele apresenta um link https que você pode abrir um localhost desse server.
+Com esse link ustilziar ele dentro do Insomnia, copiar e levar até o Insomnia
