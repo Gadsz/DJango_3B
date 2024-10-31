@@ -26,7 +26,8 @@ class ArtistaListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
-        artistas = ArtistaSerializer.objects.all()
+        artistas = Artista.objects.all() # Correção sem Serializer
+        # artistas = ArtistaSerializer.objects.all() --- Errei nesta parte colocando o Serializer após Artista (ArtistaSerializer)
         serializer = ArtistaSerializer(artistas, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -42,6 +43,7 @@ class AlbumListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
-        albums = AlbumSerializer.objects.all()
+        albums = Album.objects.all() # CORREÇÃO
+        # albums = AlbumSerializer.objects.all()
         serializer = AlbumSerializer(albums, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
