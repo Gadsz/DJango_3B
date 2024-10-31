@@ -1,0 +1,25 @@
+após inciar o app seguindo os comandos:
+
+$ python3 -m pip install Django djangorestframework
+
+django-admin startproject nome_projeto
+
+$ python3 manage.py startapp nome_app
+
+Você deve ir nas urls do NOME_PROJETO e adicionar o que foi informado lá dentro.
+
+from django.contrib import admin
+from django.urls import path, include # include foi adicionado aqui também com ", include"
+from django.contrib import admin # "from django.contrib import admin" foi adicionado também
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('exemplo_app.urls')), # Essa parte foi adicionada (    path('api/', include('NOME_DO_APP.urls')),)
+]
+
+# APÓS ISSO IR EM SETTINGS no NOME_PROJETO
+
+INSTALLED_APPS = [
+    ‘nome_app',
+    'rest_framework',
+]
