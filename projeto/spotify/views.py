@@ -15,6 +15,7 @@ from .models import Artista, Album
 from .serializers import ArtistaSerializer, AlbumSerializer
 
 # EXEMPLO 1 DE ARTISTA FUNCIONAL
+# AS VIEWS SÃO OS POST E GET DENTRO DO INSOMNIA
 
 class ArtistaListCreateView(APIView):
     def post(self, request):
@@ -25,11 +26,13 @@ class ArtistaListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
-        artistas = ArtistaSerializer.objects.all()
+        artistas = Artista.objects.all() # Correção sem Serializer
+        # artistas = ArtistaSerializer.objects.all() --- Errei nesta parte colocando o Serializer após Artista (ArtistaSerializer)
         serializer = ArtistaSerializer(artistas, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 # EXEMPLO 1 DE ALBUM FUNCIONAL
+# AS VIEWS SÃO OS POST E GET DENTRO DO INSOMNIA
 
 class AlbumListCreateView(APIView):
     def post(self, request):
