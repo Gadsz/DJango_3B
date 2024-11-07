@@ -31,6 +31,27 @@ class ArtistaListCreateView(APIView):
         serializer = ArtistaSerializer(artistas, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+# EXEMPLO PARA DAR GET DA CHAVE PRIMÁRIA, DAR UPDATE DELETE (UD DO CRUD)
+
+class ArtistaReadUpdateDeleteView(APIView):
+    def get(self, request, pk):
+        artista = get_object_or_404(Artista, pk=pk)
+        serializer = ArtistaSerializer(artista)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk):
+        artista = get_object_or_404(Artista, pk=pk)
+        serializer = ArtistaSerializer(artista, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        artista = get_object_or_404(Artista, pk=pk)
+        artista.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 # EXEMPLO 1 DE ALBUM FUNCIONAL
 # AS VIEWS SÃO OS POST E GET DENTRO DO INSOMNIA
 
@@ -43,7 +64,6 @@ class AlbumListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
-        albums = Album.objects.all() # CORREÇÃO
-        # albums = AlbumSerializer.objects.all()
+        albums = AlbumSerializer.objects.all()
         serializer = AlbumSerializer(albums, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
